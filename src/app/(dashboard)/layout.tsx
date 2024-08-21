@@ -9,7 +9,7 @@ interface Props {
 
 const layout = ({ children }: Props) => {
   return (
-    <main className="h-full">
+    <main className="h-full  ">
       <Sidebar />
       <div className="pl=[60px] h-full">
         <div className="flex gap-x-3 h-full">
