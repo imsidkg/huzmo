@@ -12,16 +12,15 @@ const convex = new ConvexReactClient(convexUrl);
 
 export const ConvexClientProvider = ({children} :ClientProviderProps) => {
     return(
-      //@ts-ignore
+    
    <ClerkProvider>
     <ConvexProviderWithClerk useAuth= {useAuth} client = {convex}>
-      <Authenticated>
-
+     <Authenticated> 
         {children}
-      </Authenticated>
-      <AuthLoading>
+       </Authenticated>
+       <AuthLoading>
         <Loading/>
-      </AuthLoading>
+      </AuthLoading> 
     </ConvexProviderWithClerk>
    </ClerkProvider>
     )
