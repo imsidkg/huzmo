@@ -1,6 +1,6 @@
 import React from 'react'
 import NewButton from './new-button'
-import List from './list'
+import List from './List'
 
 type Props = {}
 

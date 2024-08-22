@@ -4,33 +4,38 @@ import { useOrganization, useOrganizationList } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 
 interface Props {
-  id: string;
-  name: string;
-  imageUrl: string;
+ id : string ,
+ name : string,
+ imageUrl : string
 }
 
-const item = ({ id, name, imageUrl }: Props) => {
-
-    const {organization} = useOrganization();
+const Item = ({id ,  name , imageUrl} : Props) => {
+    
+    const { organization} = useOrganization();
     const {setActive} = useOrganizationList();
 
     const isActive = organization?.id === id;
 
-    const onClick = () =>{
-        if (!setActive) return null;
-        setActive({
-            organization: id,
-          });
-    }
+   const onClick = () => {
+    if(!setActive) return null;
+
+    setActive({organization : id})
+   }
+  
   return (
-    <div>
-      <Image
+    <div className="aspect-square relative">
+    <Image
       src={imageUrl}
-      alt= ''
       onClick={onClick}
-      />
-    </div>
+      alt={name}
+      fill
+      className={cn(
+        "rounded-md cursor-pointer opacity-75 hover:opacity-100 transition",
+        isActive && "opacity-100"
+      )}
+    />
+  </div>
   );
 };
 
-export default item;
+export default Item;

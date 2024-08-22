@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useOrganizationList } from "@clerk/nextjs";
-
+import Item from "./Item"
 const List = () => {
   const { userMemberships } = useOrganizationList({
     userMemberships: {
@@ -14,7 +14,12 @@ const List = () => {
   return (
     <ul className="space-y-4">
       {userMemberships.data?.map((mem) => {
-        return <p key={mem.organization.id}>{mem.organization.name}</p>;
+        return (
+            <Item key={mem.organization.id}
+            id = {mem.organization.id}
+            name = {mem.organization.name}
+            imageUrl={mem.organization.imageUrl}/>
+        )
       })}
     </ul>
   );
