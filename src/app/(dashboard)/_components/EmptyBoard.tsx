@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useOrganization } from "@clerk/nextjs";
 import { useMutation } from "convex/react";
 import Image from "next/image";
-import { title } from "process";
 import { api } from "../../../../convex/_generated/api";
+import { toast } from "sonner";
 
 
 const EmptyBoard = () => {
@@ -18,7 +18,13 @@ const EmptyBoard = () => {
     create({
       orgId : organization.id,
       title : 'Untitled' ,
+    }).then((id) => {
+      toast.success("Board created");
+      // router.push(`/board/${id}`);
     })
+    .catch(() => {
+      toast.error("Failed to create board");
+    });
   }
   return (
     <div className="h-full flex flex-col items-center justify-center">
