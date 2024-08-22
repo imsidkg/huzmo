@@ -1,6 +1,7 @@
 import React from 'react'
 import EmptySearch from './EmptySearch';
 import EmptyFavourites from './EmptyFavourites';
+import EmptyBoard from './EmptyBoard';
 
 interface BoardListProps {
     orgId: string;
@@ -21,7 +22,7 @@ const BoardList = ({ orgId, query }: BoardListProps) => {
       }
     
       if (!data?.length) {
-        return <div> Nothing at all</div>
+        return <EmptyBoard/>
       }
     
   return (
