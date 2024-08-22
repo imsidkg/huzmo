@@ -1,9 +1,9 @@
+"use client";
+
+import * as React from "react";
 import { useOrganizationList } from "@clerk/nextjs";
-import React from "react";
 
-type Props = {};
-
-const list = (props: Props) => {
+const List = () => {
   const { userMemberships } = useOrganizationList({
     userMemberships: {
       infinite: true,
@@ -20,4 +20,4 @@ const list = (props: Props) => {
   );
 };
 
-export default list;
+export default List;

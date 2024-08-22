@@ -1,3 +1,4 @@
+'use client'
 import React, { Children } from "react";
 import Sidebar from "./_components/sidebar";
 import OrgSidebar from "./_components/OrgSidebar";

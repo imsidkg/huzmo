@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import { Plus } from "lucide-react";
 import { CreateOrganization } from "@clerk/nextjs";
@@ -23,6 +24,9 @@ const NewButton = (props: Props) => {
           </button>
         </div>
       </DialogTrigger>
+      <DialogContent className = 'p-0 bg-transparent border-none max-w-[480px]'>
+        <CreateOrganization routing="hash"/>
+      </DialogContent>
     </Dialog>
   );
 };
