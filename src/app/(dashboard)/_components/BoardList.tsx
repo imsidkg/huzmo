@@ -1,4 +1,6 @@
 import React from 'react'
+import EmptySearch from './EmptySearch';
+import EmptyFavourites from './EmptyFavourites';
 
 interface BoardListProps {
     orgId: string;
@@ -11,11 +13,11 @@ interface BoardListProps {
 const BoardList = ({ orgId, query }: BoardListProps) => {
     const data= []
     if (!data?.length && query.search) {
-        return <div> No item found</div>
+        return <EmptySearch/>
       }
     
       if (!data?.length && query.favourites) {
-        return <div> No fav found</div>
+        return <EmptyFavourites/>
       }
     
       if (!data?.length) {
