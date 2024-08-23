@@ -4,6 +4,7 @@ import EmptyFavourites from './EmptyFavourites';
 import EmptyBoard from './EmptyBoard';
 import { useQuery } from 'convex/react';
 import { api } from '../../../../convex/_generated/api';
+import BoardCard from './BoardCard';
 
 interface BoardListProps {
     orgId: string;
@@ -41,7 +42,7 @@ const BoardList = ({ orgId, query }: BoardListProps) => {
             authorName={board.authorName}
             createdAt={board._creationTime}
             orgId={board.orgId}
-            isFavourite={board.isFavourite}
+            // isFavourite={board.isFavourite}
           />
         ))}
       </div>

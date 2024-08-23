@@ -15,6 +15,7 @@ import { toast } from "sonner";
 import { Overlay } from "./overlay";
 import { Skeleton } from "@/components/ui/skeleton";
 import Footer from "./Footer";
+import Actions from "@/components/Actions";
 
 interface BoardCardProps {
     id: string;

@@ -9,11 +9,21 @@ import {
   DialogHeader,
 } from "@/components/ui/dialog";
 import { useRenameModal } from '../../../store/useRenameModal'
+import { useApiMutation } from "../../../hooks/useApiMutation";
+import { api } from "../../../convex/_generated/api";
 
 type Props = {}
 
 const RenameModal = (props: Props) => {
   const {isOpen , onClose} = useRenameModal()
+  const {mutate , isLoading} = useApiMutation(api.board.)
+
+  const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+
+
+  }
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
     <DialogContent>
