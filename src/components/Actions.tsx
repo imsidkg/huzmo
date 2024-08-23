@@ -1,6 +1,7 @@
 import type { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
 import { Link2, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -8,6 +9,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+
+import { useApiMutation } from "../../hooks/useApiMutation";
+import { api } from "../../convex/_generated/api";
+import { Id } from "../../convex/_generated/dataModel";
 
 interface ActionProp {
   children: React.ReactNode;
@@ -18,11 +23,16 @@ interface ActionProp {
 }
 
 const Actions = ({ children, side, sideOffset, id, title }: ActionProp) => {
+    const {mutate, isLoading} = useApiMutation(api.board.remove)
      
     function handleCopyLink () {
         navigator.clipboard.writeText(`${window.location.origin}/boards/${id}`).then(() => toast.success('Link Copied')).catch(() => 'Failed to copy the link')
     }
 
+
+    function onDelete() {
+        mutate({ id: id as Id<"boards">}).then(() => toast.success('Board Deleted Successfullly')).catch(() => toast.error("Failed to delete the board"))
+    }
   return (
     <DropdownMenu>
     <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
@@ -63,5 +73,5 @@ const Actions = ({ children, side, sideOffset, id, title }: ActionProp) => {
     </DropdownMenuContent>
   </DropdownMenu>
   )
-
+}
 export default Actions;
