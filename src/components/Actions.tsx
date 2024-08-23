@@ -13,6 +13,8 @@ import {
 import { useApiMutation } from "../../hooks/useApiMutation";
 import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
+import { useRenameModal} from '../../store/useRenameModal'
+import { ConfirmModal } from "./ConfirmModal";
 
 interface ActionProp {
   children: React.ReactNode;
@@ -23,6 +25,8 @@ interface ActionProp {
 }
 
 const Actions = ({ children, side, sideOffset, id, title }: ActionProp) => {
+
+    const {onOpen} = useRenameModal();
     const {mutate, isLoading} = useApiMutation(api.board.remove)
      
     function handleCopyLink () {
@@ -51,16 +55,16 @@ const Actions = ({ children, side, sideOffset, id, title }: ActionProp) => {
       </DropdownMenuItem>
       <DropdownMenuItem
         className="p-3 cursor-pointer"
-        // onClick={() => onOpen(id, title)}
+        onClick={() => onOpen(id, title)}
       >
         <Pencil className="h-4 w-4 mr-2" />
         Rename
       </DropdownMenuItem>
-      {/* <ConfirmModal
+      <ConfirmModal
         header="Delete board?"
         description="This will delete the board and all of its content"
         disabled={isLoading}
-        onConfirm={handleDelete}
+        onConfirm={onDelete}
       >
         <Button
           className="p-3 cursor-pointer w-full justify-start font-normal"
@@ -69,7 +73,7 @@ const Actions = ({ children, side, sideOffset, id, title }: ActionProp) => {
           <Trash2 className="h-4 w-4 mr-2" />
           Delete
         </Button>
-      </ConfirmModal> */}
+      </ConfirmModal>
     </DropdownMenuContent>
   </DropdownMenu>
   )
