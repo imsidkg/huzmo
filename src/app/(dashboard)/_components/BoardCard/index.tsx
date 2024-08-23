@@ -12,10 +12,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
 
-import { Overlay } from "./overlay";
+
 import { Skeleton } from "@/components/ui/skeleton";
 import Footer from "./Footer";
 import Actions from "@/components/Actions";
+import { Overlay } from "./Overlay";
 
 interface BoardCardProps {
     id: string;
@@ -49,12 +50,12 @@ const BoardCard =({  id,
                   </Actions>
                 </div>
                 <Footer
-                //   isFavourite={isFavourite}
-                //   title={title}
-                //   authorLabel={authorLabel}
-                //   createdAtLabel={createdAtLabel}
-                //   onClick={toggleFavourite}
-                //   disabled={isFavouriting || isUnfavouriting}
+                  // isFavourite={isFavourite}
+                  // title={title}
+                  // authorLabel={authorLabel}
+                  // createdAtLabel={createdAtLabel}
+                  // onClick={toggleFavourite}
+                  // disabled={isFavouriting || isUnfavouriting}
                 />
               </div>
             </Link>
