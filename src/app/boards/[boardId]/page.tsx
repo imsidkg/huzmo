@@ -1,12 +1,20 @@
 import React from 'react'
 import Canvas from './_components/Canvas'
+import Room from '@/components/Room'
 
-type Props = {}
+interface Props  {
+    params : {
+        boardId : string
+    }
+}
 
-const page = (props: Props) => {
+const page = ({params}: Props) => {
   return (
     <div>
-        <Canvas/>
+        <Room roomId={params.boardId}>
+
+        <Canvas boardId =  {params.boardId}/>
+        </Room>
     </div>
   )
 }
