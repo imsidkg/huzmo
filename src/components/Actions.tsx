@@ -28,6 +28,8 @@ const Actions = ({ children, side, sideOffset, id, title }: ActionProp) => {
 
     const {onOpen} = useRenameModal();
     const {mutate, isLoading} = useApiMutation(api.board.remove)
+    
+
      
     function handleCopyLink () {
         navigator.clipboard.writeText(`${window.location.origin}/boards/${id}`).then(() => toast.success('Link Copied')).catch(() => 'Failed to copy the link')

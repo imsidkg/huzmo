@@ -1,10 +1,8 @@
 "use client";
 
-// import { Actions } from "@/components/actions";
-// import { Skeleton } from "@/components/ui/skeleton";
-// import { api } from "@/convex/_generated/api";
-// import { Id } from "@/convex/_generated/dataModel";
-// import { useApiMutation } from "@/hooks/useApiMutation";
+
+
+
 import { useAuth } from "@clerk/nextjs";
 import { formatDistanceToNow } from "date-fns";
 import { MoreHorizontal } from "lucide-react";
@@ -17,6 +15,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Footer from "./Footer";
 import Actions from "@/components/Actions";
 import { Overlay } from "./Overlay";
+import { useApiMutation } from "../../../../../hooks/useApiMutation";
+import { Id } from "../../../../../convex/_generated/dataModel";
+import { api } from "../../../../../convex/_generated/api";
 
 interface BoardCardProps {
     id: string;
@@ -37,6 +38,20 @@ const BoardCard =({  id,
     createdAt,
     orgId,
     isFavourite,} : BoardCardProps) => {
+      const {mutate:onFavourite , isLoading:onFavouriteLoading} = useApiMutation(api.board.favourite)
+    const {mutate:onUnFavourite , isLoading:onUnFavouriteLoading} = useApiMutation(api.board.unfavourite);
+
+    function toggleFavourite () {
+      if (isFavourite) {
+        onUnFavourite({ id: id as Id<"boards"> }).catch(() =>
+          toast.error("Failed to unfavourite board")
+        );
+      } else {
+        onFavourite({ id: id as Id<"boards">, orgId }).catch(() =>
+          toast.error("Failed to favourite board")
+        );
+      }
+    }
         return (
             <Link href={`/boards/${id}`}>
               <div className="group aspect-[100/127] border rounded-lg flex flex-col justify-center overflow-hidden">
@@ -50,12 +65,12 @@ const BoardCard =({  id,
                   </Actions>
                 </div>
                 <Footer
-                  // isFavourite={isFavourite}
-                  // title={title}
-                  // authorLabel={authorLabel}
-                  // createdAtLabel={createdAtLabel}
-                  // onClick={toggleFavourite}
-                  // disabled={isFavouriting || isUnfavouriting}
+                  isFavourite={isFavourite}
+                  title={title}
+                  authorLabel={authorLabel}
+                  createdAtLabel={createdAtLabel}
+                  onClick={toggleFavourite}
+                  disabled={onFavouriteLoading || onUnFavouriteLoading}
                 />
               </div>
             </Link>
