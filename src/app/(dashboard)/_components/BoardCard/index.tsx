@@ -38,6 +38,7 @@ const BoardCard =({  id,
     createdAt,
     orgId,
     isFavourite,} : BoardCardProps) => {
+      
       const {mutate:onFavourite , isLoading:onFavouriteLoading} = useApiMutation(api.board.favourite)
     const {mutate:onUnFavourite , isLoading:onUnFavouriteLoading} = useApiMutation(api.board.unfavourite);
 
@@ -67,8 +68,8 @@ const BoardCard =({  id,
                 <Footer
                   isFavourite={isFavourite}
                   title={title}
-                  authorLabel={authorLabel}
-                  createdAtLabel={createdAtLabel}
+                  // authorLabel={authorLabel}
+                  // createdAtLabel={createdAtLabel}
                   onClick={toggleFavourite}
                   disabled={onFavouriteLoading || onUnFavouriteLoading}
                 />
