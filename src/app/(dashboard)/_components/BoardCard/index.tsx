@@ -39,20 +39,25 @@ const BoardCard =({  id,
     orgId,
     isFavourite,} : BoardCardProps) => {
       
-      const {mutate:onFavourite , isLoading:onFavouriteLoading} = useApiMutation(api.board.favourite)
-    const {mutate:onUnFavourite , isLoading:onUnFavouriteLoading} = useApiMutation(api.board.unfavourite);
+      const { mutate: favourite, isLoading: isFavouriting } = useApiMutation(
+        api.board.favourite
+      );
+      const { mutate: unfavourite, isLoading: isUnfavouriting } = useApiMutation(
+        api.board.unfavourite
+      );
+    
 
-    function toggleFavourite () {
-      if (isFavourite) {
-        onUnFavourite({ id: id as Id<"boards"> }).catch(() =>
-          toast.error("Failed to unfavourite board")
-        );
-      } else {
-        onFavourite({ id: id as Id<"boards">, orgId }).catch(() =>
-          toast.error("Failed to favourite board")
-        );
-      }
-    }
+      const toggleFavourite = () => {
+        if (isFavourite) {
+          unfavourite({ id: id as Id<"boards"> }).catch(() =>
+            toast.error("Failed to unfavourite board")
+          );
+        } else {
+          favourite({ id: id as Id<"boards">, orgId }).catch(() =>
+            toast.error("Failed to favourite board")
+          );
+        }
+      };
         return (
             <Link href={`/boards/${id}`}>
               <div className="group aspect-[100/127] border rounded-lg flex flex-col justify-center overflow-hidden">
@@ -71,7 +76,7 @@ const BoardCard =({  id,
                   // authorLabel={authorLabel}
                   // createdAtLabel={createdAtLabel}
                   onClick={toggleFavourite}
-                  disabled={onFavouriteLoading || onUnFavouriteLoading}
+                  disabled={isFavouriting || isUnfavouriting}
                 />
               </div>
             </Link>
