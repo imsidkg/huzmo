@@ -11,7 +11,9 @@ type Props = {}
 const Room = ({children , roomId} : {children : ReactNode , roomId:string}) => {
     
   return (
-    <LiveblocksProvider publicApiKey={process.env.NEXT_PUBLIC_LIVEBLOCK_SECRET!}>
+    //@ts-ignore
+    <LiveblocksProvider 
+    authEndpoint="/api/liveblocks-auth">
     <RoomProvider id={roomId} initialPresence={{}}>
         <ClientSideSuspense fallback = {<div>Loading ....</div>}>
             {() => children}
