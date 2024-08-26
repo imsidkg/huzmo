@@ -1,15 +1,15 @@
 "use client";
 
 
-import { useOthersConnectionIds, useSelf } from "@liveblocks/react/suspense";
+import {  useOthers,   useSelf } from "@liveblocks/react/suspense";
 
 import { connectionIdToColor } from "@/lib/utils";
 import UserAvatar from "./UserAvatar";
 
 const MAX_SHOWN_OTHER_USERS = 2;
 
-const Participants = (props: Props) => {
-  const otherUsers = useOthersConnectionIds();
+const Participants = () => {
+  const otherUsers = useOthers();
   const currentUser = useSelf();
   const hasMoreUsers = otherUsers.length > MAX_SHOWN_OTHER_USERS;
 
