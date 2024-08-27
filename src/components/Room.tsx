@@ -13,6 +13,7 @@ const Room = ({children , roomId} : {children : ReactNode , roomId:string}) => {
   return (
     //@ts-ignore
     <LiveblocksProvider 
+    throttle={16}
     authEndpoint="/api/liveblocks-auth">
     <RoomProvider id={roomId} initialPresence={{}}>
         <ClientSideSuspense fallback = {<div>Loading ....</div>}>
