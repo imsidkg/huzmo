@@ -20,7 +20,7 @@ const Room = ({children , roomId} : {children : ReactNode , roomId:string}) => {
     authEndpoint="/api/liveblocks-auth"
     
     >
-    <RoomProvider id={roomId} initialPresence={{}}   initialStorage={{
+    <RoomProvider id={roomId} initialPresence={{cursor : null , selection: []}}   initialStorage={{
         layers: new LiveMap<string, LiveObject<Layer>>(),
         layerIds: new LiveList<string>(["user1", "user2"]),
       }}>
