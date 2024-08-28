@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { LayerType } from '../../../../../types/canvas';
 
 interface LayerPreviewProps {
     id: string;
