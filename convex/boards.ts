@@ -1,37 +1,39 @@
 import { v } from "convex/values";
 import { query } from "./_generated/server";
 import { getAllOrThrow } from "convex-helpers/server/relationships";
-import { favourite } from "./board";
 
 export const get = query({
   args: {
     orgId: v.string(),
-    favourites: v.optional(v.string()),
     search: v.optional(v.string()),
+    favourites: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
+
     if (!identity) {
-      throw new Error("Unauthorized from entering");
+      throw new Error("Unauthorized");
     }
 
-   if(args.favourites ) {
-    const favouriteBoards = await ctx.db.query("userFavourites")
-    .withIndex("by_user_org", (q) =>
-      q.eq("userId", identity.subject).eq("orgId", args.orgId)
-    )
-    .order("desc")
-    .collect();
+    if (args.favourites) {
+      const favouriteBoards = await ctx.db
+        .query("userFavourites")
+        .withIndex("by_user_org", (q) =>
+          q.eq("userId", identity.subject).eq("orgId", args.orgId)
+        )
+        .order("desc")
+        .collect();
 
-    const ids = favouriteBoards.map((favourite) => favourite.boardId);
+      const ids = favouriteBoards.map((favourite) => favourite.boardId);
 
-    const boards = await getAllOrThrow(ctx.db, ids);
+      const boards = await getAllOrThrow(ctx.db, ids);
 
-    return boards.map((board) => ({
-      ...board,
-      isFavourite: true,
-    }));
-   }
+      return boards.map((board) => ({
+        ...board,
+        isFavourite: true,
+      }));
+    }
+
     const title = args.search as string;
 
     let boards = [];
@@ -51,7 +53,7 @@ export const get = query({
         .collect();
     }
 
-    const boardsWithFavouriteRelation = boards.map(async (board) => {
+    const boardsWithFavouriteRelation = boards.map((board) => {
       return ctx.db
         .query("userFavourites")
         .withIndex("by_user_board", (q) =>
@@ -64,6 +66,7 @@ export const get = query({
     });
 
     const boardsWithFavouriteBoolean = Promise.all(boardsWithFavouriteRelation);
+
     return boardsWithFavouriteBoolean;
   },
 });

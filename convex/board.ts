@@ -19,12 +19,13 @@ export const create = mutation({
     orgId: v.string(),
     title: v.string(),
   },
-
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
+
     if (!identity) {
-      throw new Error("Unauthorized from entering");
+      throw new Error("Unauthorized");
     }
+
     const randomImage = images[Math.floor(Math.random() * images.length)];
 
     const board = await ctx.db.insert("boards", {
@@ -34,6 +35,7 @@ export const create = mutation({
       authorName: identity.name!,
       imageUrl: randomImage,
     });
+
     return board;
   },
 });
@@ -97,38 +99,40 @@ export const update = mutation({
 });
 
 export const favourite = mutation({
-  args: {
-    id: v.id("boards"),
-    orgId: v.string(),
-  },
+  args: { id: v.id("boards"), orgId: v.string() },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
+
     if (!identity) {
       throw new Error("Unauthorized");
     }
 
     const board = await ctx.db.get(args.id);
+
     if (!board) {
       throw new Error("Board not found");
     }
 
     const userId = identity.subject;
 
-    const existingFavourites = await ctx.db
+    const existingFavourite = await ctx.db
       .query("userFavourites")
-      .withIndex("by_user_board", (q) => 
+      .withIndex("by_user_board", (q) =>
         q.eq("userId", userId).eq("boardId", board._id)
-      ).unique();
+      )
+      .unique();
 
-      if(existingFavourites) {
-        throw new Error("Board already Favourited")
-      }
+    if (existingFavourite) {
+      throw new Error("Board already favourited");
+    }
 
-      await ctx.db.insert('userFavourites' , {
-        orgId :args.orgId,
-        userId : userId,
-        boardId : board._id
-      })
+    await ctx.db.insert("userFavourites", {
+      orgId: args.orgId,
+      userId: userId,
+      boardId: board._id,
+    });
+
+    return board;
   },
 });
 
@@ -166,7 +170,6 @@ export const unfavourite = mutation({
   },
 });
 
-
 export const get = query({
   args: { id: v.id("boards") },
   handler: async (ctx, args) => {
@@ -179,5 +182,3 @@ export const get = query({
     return board;
   },
 });
-
-

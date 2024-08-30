@@ -1,7 +1,6 @@
-
+import { useSelf, useStorage } from "@/liveblocks.config";
+import type { Layer, XYWH } from "@/types/canvas";
 import { shallow } from "@liveblocks/react";
-import { Layer, XYWH } from "../types/canvas";
-import { useSelf, useStorage } from "@liveblocks/react/suspense";
 
 const boundingBox = (layers: Layer[]): XYWH | null => {
   const first = layers[0];
