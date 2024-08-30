@@ -1,8 +1,9 @@
 "use client";
 
 import { useSelectionBounds } from "@/hooks/useSelectionBounds";
-import { useSelf, useStorage } from "@/liveblocks.config";
+
 import { LayerType, Side, XYWH } from "@/types/canvas";
+import { useSelf, useStorage } from "@liveblocks/react/suspense";
 import { memo } from "react";
 
 interface SelectionBoxProps {
