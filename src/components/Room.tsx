@@ -17,7 +17,15 @@ const Room = ({children , roomId} : {children : ReactNode , roomId:string}) => {
     //@ts-ignore
     <LiveblocksProvider 
     throttle={16}
-    authEndpoint="/api/liveblocks-auth"
+    authEndpoint="/api/liveblocks-auth" 
+    resolveUsers={async ({ userIds }) => {
+      const usersData = await __getUsersFromDB__(userIds);
+
+      return usersData.map((userData) => ({
+        name: userData.name,
+        avatar: userData.avatar.src,
+      }));
+    }}
     
     >
     <RoomProvider id={roomId} initialPresence={{cursor : null , selection: []}}   initialStorage={{

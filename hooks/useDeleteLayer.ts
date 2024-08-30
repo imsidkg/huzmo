@@ -1,4 +1,5 @@
-import { useMutation } from "@liveblocks/react/suspense";
+
+import { useMutation, useSelf } from "@liveblocks/react/suspense";
 
 
 export const useDeleteLayers = () => {
