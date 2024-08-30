@@ -1,5 +1,11 @@
 "use client";
 
+import { shallow, useOthersConnectionIds, useOthersMapped } from "@liveblocks/react/suspense";
+import Cursor from "./Cursor";
+import Path from "./Path";
+import { colorToCss } from "@/lib/utils";
+import { memo } from "react";
+
 
 const Cursors = () => {
   const ids = useOthersConnectionIds();

@@ -1,3 +1,4 @@
+import { connectionIdToColor } from '@/lib/utils'
 import { useOther } from '@liveblocks/react/suspense'
 import { MousePointer2 } from 'lucide-react'
 import React, { memo } from 'react'

@@ -1,13 +1,25 @@
-import React, { memo } from 'react'
-import { LayerType } from '../../../../../types/canvas';
+
+"use client";
+
+import { useStorage } from "@liveblocks/react/suspense";
+import { memo } from "react";
+import { LayerType } from "../../../../../types/canvas";
+import Path from "./Path";
+import { colorToCss } from "@/lib/utils";
+import { Note } from "./Note";
+import Text from "./Text";
+import Ellipse from "./Ellipse";
+import Rectangle from "./Rectangle";
+
 
 interface LayerPreviewProps {
-    id: string;
-    onLayerPointerDown: (e: React.PointerEvent, layerId: string) => void;
-    selectionColor: string;
-  }
+  id: string;
+  onLayerPointerDown: (e: React.PointerEvent, layerId: string) => void;
+  selectionColor: string;
+}
 
-const LayerPreview = memo(({ id, onLayerPointerDown, selectionColor }: LayerPreviewProps) => {
+export const LayerPreview = memo(
+  ({ id, onLayerPointerDown, selectionColor }: LayerPreviewProps) => {
     const layer = useStorage((root) => root.layers.get(id));
 
     if (!layer) return null;
@@ -68,6 +80,4 @@ const LayerPreview = memo(({ id, onLayerPointerDown, selectionColor }: LayerPrev
   }
 );
 
-})
-
-export default LayerPreview
+LayerPreview.displayName = "LayerPreview";

@@ -71,4 +71,4 @@ export  const Text = ({
 };
 
 
-export default Tools
+export default Text

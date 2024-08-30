@@ -1,8 +1,8 @@
 
 
-import { Hint } from "@/components/hint";
+import { Hint } from "@/components/Hint";
 import { Button } from "@/components/ui/button";
-import { LucideIcon } from "lucide-react";
+import {  LucideIcon } from "lucide-react";
 
 interface ToolButtonProps {
   label: string;
@@ -12,7 +12,7 @@ interface ToolButtonProps {
   disabled?: boolean;
 }
 
-const ToolButton = ({label , icon , onClick , isActive ,disabled} :  ToolButtonProps) => {
+const ToolButton = ({label , icon:Icon , onClick , isActive ,disabled} :  ToolButtonProps) => {
   return (
     <Hint label={label} side="right" sideOffset={14}>
     <Button

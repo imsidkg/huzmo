@@ -1,4 +1,6 @@
+import { colorToCss } from '@/lib/utils';
 import React from 'react'
+import { EllipseLayer } from '../../../../../types/canvas';
 
 interface EllipseProps {
     id: string;

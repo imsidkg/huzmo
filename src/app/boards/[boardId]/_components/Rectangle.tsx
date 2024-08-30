@@ -1,7 +1,8 @@
 import React from 'react'
 
 import { colorToCss } from "@/lib/utils";
-import { RectangleLayer } from "@/types/canvas";
+import { RectangleLayer } from '../../../../../types/canvas';
+
 
 interface RectangleProps {
   id: string;
