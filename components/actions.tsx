@@ -1,5 +1,5 @@
 "use client";
-
+import { useRouter } from 'next/navigation'
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useApiMutation } from "@/hooks/useApiMutation";
@@ -40,10 +40,13 @@ export function Actions({
       .then(() => toast.success("Link copied!"))
       .catch(() => toast.error("Failed to copy link"));
   };
-
+  const router = useRouter()
   const handleDelete = () => {
     remove({ id: id as Id<"boards"> })
-      .then(() => toast.success("Board deleted!"))
+      .then(() => {
+        toast.success("Board deleted!");
+        router.push("/");
+      })
       .catch(() => toast.error("Failed to delete board"));
   };
 
